@@ -11,14 +11,13 @@ using System.Windows.Forms;
 namespace Zakirova
 {
 	public partial class FormTruck : Form
-    {
-        
-        private DumpTruck truck;
+    {      
+        private ITTruck truck;
 
         public FormTruck()
-        {
-            InitializeComponent();
-        }
+		{
+			InitializeComponent();		
+		}
 
         /// <summary>
         /// Метод отрисовки машины
@@ -29,7 +28,8 @@ namespace Zakirova
             Graphics gr = Graphics.FromImage(bmp);
             truck.DrawTransport(gr);
             pictureBoxTruck.Image = bmp;           
-        }     
+        }
+     
        
         /// <summary>
         /// Обработка нажатия кнопки "Создать"
@@ -39,9 +39,21 @@ namespace Zakirova
         private void button1_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            truck = new DumpTruck();
-            truck.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true, true, true, true); truck.SetPosition(rnd.Next(80, 500),
+            truck = new Truck(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);            
+            truck.SetPosition(rnd.Next(80, 500),
+           rnd.Next(10, 100), pictureBoxTruck.Width, pictureBoxTruck.Height);
+            Draw();
+        }
+
+        /// <summary>
+        /// Обработка нажатия кнопки "Улучшение"
+        /// </summary>        
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            truck = new DumpTruck(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
+           Color.Yellow, true, true, true, true);
+            truck.SetPosition(rnd.Next(80, 500),
            rnd.Next(10, 100), pictureBoxTruck.Width, pictureBoxTruck.Height);
             Draw();
         }
@@ -53,7 +65,6 @@ namespace Zakirova
         /// <param name="e"></param>
         private void buttonMove_Click(object sender, EventArgs e)
         {
-            //получаем имя кнопки
             string name = (sender as Button).Name;
             switch (name)
             {
@@ -71,6 +82,6 @@ namespace Zakirova
                     break;
             }
             Draw();
-        }      
+        }       
     }
 }
