@@ -45,8 +45,8 @@ namespace Zakirova
        
         public void SetPosition(int x, int y, int width, int height)
         {
-            _startPosX = x;
-            _startPosY = y;
+            _startPosX = x + 60;
+            _startPosY = y + 57;
             _pictureHeight = height;
             _pictureWidth = width;
         }
