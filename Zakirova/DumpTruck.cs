@@ -70,13 +70,13 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
         /// <param name="g"></param>
         public override void DrawTransport(Graphics g)
         {          
-            Pen fog1 = new Pen(DopColor);
-            Pen back1 = new Pen(Color.LightGray);
+            Pen fog1 = new Pen(Color.Gray);
+            Pen back1 = new Pen(DopColor);
             Pen light1 = new Pen(Color.Yellow);
          
             Brush light = new SolidBrush(Color.Yellow);
-            Brush fog = new SolidBrush(DopColor);
-            Brush back = new SolidBrush(Color.LightGray);
+            Brush fog = new SolidBrush(Color.Gray);
+            Brush back = new SolidBrush(DopColor);
 
             base.DrawTransport(g);
 
