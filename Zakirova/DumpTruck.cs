@@ -10,10 +10,8 @@ namespace Zakirova
     /// <summary>
     /// Класс отрисовки самовсвала
     /// </summary>
-
     public class DumpTruck : Truck
-	{
-       
+	{       
         /// <summary>
         /// Дополнительный цвет
         /// </summary>
@@ -71,14 +69,13 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
         /// </summary>
         /// <param name="g"></param>
         public override void DrawTransport(Graphics g)
-        {
-          
-            Pen fog1 = new Pen(Color.Gray);
+        {          
+            Pen fog1 = new Pen(DopColor);
             Pen back1 = new Pen(Color.LightGray);
             Pen light1 = new Pen(Color.Yellow);
          
             Brush light = new SolidBrush(Color.Yellow);
-            Brush fog = new SolidBrush(Color.Gray);
+            Brush fog = new SolidBrush(DopColor);
             Brush back = new SolidBrush(Color.LightGray);
 
             base.DrawTransport(g);
@@ -103,10 +100,6 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
                 g.DrawRectangle(back1, _startPosX, _startPosY - 30, 60, 40);
                 g.FillRectangle(back, _startPosX, _startPosY - 30, 60, 40);
             }
-            
-
         }
-
     }
-
 }

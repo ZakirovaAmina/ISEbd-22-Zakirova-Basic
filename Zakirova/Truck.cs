@@ -86,10 +86,10 @@ truckHeight)
         public override void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
-            Pen wheel = new Pen(Color.LightBlue);
+            Pen wheel = new Pen(MainColor);
           
             Brush fond = new SolidBrush(Color.Black);            
-            Brush wheels = new SolidBrush(Color.LightBlue);
+            Brush wheels = new SolidBrush(MainColor);
 
             
             g.DrawRectangle(pen, _startPosX, _startPosY, 100, 25);
