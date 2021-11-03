@@ -17,9 +17,7 @@ namespace Zakirova
         public FormTruck()
 		{
 			InitializeComponent();		
-		}
-        
-        
+		}  
        
         /// <summary>
         /// Передача самосвала на форму
@@ -50,8 +48,7 @@ namespace Zakirova
         {
             Random rnd = new Random();
             truck = new Truck(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);            
-            truck.SetPosition(rnd.Next(80, 500),
-           rnd.Next(10, 100), pictureBoxTruck.Width, pictureBoxTruck.Height);
+            truck.SetPosition(rnd.Next(80, 500), rnd.Next(10, 100), pictureBoxTruck.Width, pictureBoxTruck.Height);
             Draw();
         }
         

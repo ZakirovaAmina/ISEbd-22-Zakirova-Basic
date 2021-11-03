@@ -31,7 +31,6 @@ namespace Zakirova
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
             this.button_parking = new System.Windows.Forms.Button();
-            this.button_parkingMod = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_Take = new System.Windows.Forms.Button();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
@@ -64,17 +63,6 @@ namespace Zakirova
             this.button_parking.Text = "Припарковать самосвал";
             this.button_parking.UseVisualStyleBackColor = true;
             this.button_parking.Click += new System.EventHandler(this.button_parking_Click);
-            // 
-            // button_parkingMod
-            // 
-            this.button_parkingMod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_parkingMod.Location = new System.Drawing.Point(665, 296);
-            this.button_parkingMod.Name = "button_parkingMod";
-            this.button_parkingMod.Size = new System.Drawing.Size(122, 62);
-            this.button_parkingMod.TabIndex = 2;
-            this.button_parkingMod.Text = "Припарковать модифицированный самосвал";
-            this.button_parkingMod.UseVisualStyleBackColor = true;
-            this.button_parkingMod.Click += new System.EventHandler(this.button_parkingMod_Click);
             // 
             // groupBox1
             // 
@@ -171,11 +159,10 @@ namespace Zakirova
             this.Controls.Add(this.listBoxParking);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button_parkingMod);
             this.Controls.Add(this.button_parking);
             this.Controls.Add(this.pictureBoxParking);
             this.Name = "FormTruckParking";
-            this.Text = "FormTruckParking";
+            this.Text = "Парковка";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -188,7 +175,6 @@ namespace Zakirova
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
         private System.Windows.Forms.Button button_parking;
-        private System.Windows.Forms.Button button_parkingMod;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button_Take;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;

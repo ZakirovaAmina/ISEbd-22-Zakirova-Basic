@@ -20,11 +20,11 @@ namespace Zakirova
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
-        protected int _pictureWidth = 100;
+        protected int _pictureWidth;
         /// <summary>
         /// Высота окна отрисовки
         /// </summary>
-        protected int _pictureHeight = 100;
+        protected int _pictureHeight;
         protected int height = 57;
         
         /// <summary>
@@ -49,6 +49,10 @@ namespace Zakirova
             _startPosY = y + 57;
             _pictureHeight = height;
             _pictureWidth = width;
+        }
+        public void SetMainColor(Color color)
+        {
+            MainColor = color;
         }
         public abstract void DrawTransport(Graphics g);
         public abstract void MoveTransport(Direction direction);

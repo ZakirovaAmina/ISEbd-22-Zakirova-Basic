@@ -14,7 +14,7 @@ namespace Zakirova
         /// <summary>
         /// Ширина отрисовки самосвала
         /// </summary>
-        protected readonly int truckWidth = 100;
+        protected readonly int truckWidth = 90;
         /// <summary>
         /// Высота отрисовки самосвала
         /// </summary>
@@ -54,23 +54,23 @@ truckHeight)
         }
         public override void MoveTransport(Direction direction)
         {
-            int scale = 63;
+            int scale = 110;
             float step = MaxSpeed * 100 / Weight;
             switch (direction)
             {
                 // вправо
                 case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - truckWidth - scale) { _startPosX += step; }
+                    if (_startPosX + step < _pictureWidth - truckWidth + scale) { _startPosX += step; }
                     break;
 
                 //влево
                 case Direction.Left:
-                    if (_startPosX - step > scale) { _startPosX -= step; }
+                    if (_startPosX - step > 0) { _startPosX -= step; }
                     break;
 
                 //вверх
                 case Direction.Up:
-                    if (_startPosY - step > scale) { _startPosY -= step; }
+                    if (_startPosY - step > 0) { _startPosY -= step; }
                     break;
 
                 //вниз
