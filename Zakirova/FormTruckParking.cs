@@ -67,54 +67,28 @@ pictureBoxParking.Height);
         /// <param name="e"></param>
         private void button_parking_Click(object sender, EventArgs e)
         {
-            if (listBoxParking.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var truck = new Truck(100, 1000, dialog.Color);
-
-                    if (parkingCollection[listBoxParking.SelectedItem.ToString()] + truck)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
+            var formTruckConfig = new FormTruckConfig();
+            formTruckConfig.AddEvent(AddTruck);
+            formTruckConfig.Show();
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать гоночный автомобиль"
+        /// Метод добавления машины
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button_parkingMod_Click(object sender, EventArgs e)
+        private void AddTruck(Vehicle truck)
         {
-            if (listBoxParking.SelectedIndex > -1)
+            if (truck != null && listBoxParking.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if ((parkingCollection[listBoxParking.SelectedItem.ToString()]) + truck)
                 {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var truck = new DumpTruck(100, 1000, dialog.Color, dialogDop.Color,
-                       true, true, true, true);
-                        if (parkingCollection[listBoxParking.SelectedItem.ToString()] + truck)
-
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Самосвал не удалось поставить");
                 }
             }
         }
+        
         /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>

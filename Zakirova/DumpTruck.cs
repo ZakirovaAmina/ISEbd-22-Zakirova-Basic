@@ -101,5 +101,13 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
                 g.FillRectangle(back, _startPosX, _startPosY - 30, 60, 40);
             }
         }
+        /// <summary>
+        /// Смена дополнительного цвета
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }
