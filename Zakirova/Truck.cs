@@ -20,9 +20,9 @@ namespace Zakirova
         /// </summary>
         protected readonly int truckHeight = 60;
         /// <summary>
-        /// Максимальная скорость
+        /// Разделитель для записи информации по объекту в файл
         /// </summary>
-       
+        protected readonly char separator = ';';
         /// <param name="duct">Признак наличия трубы</param>
         /// <param name="carcase">Признак наличия кузова</param>
         /// <param name="frontLight">Признак наличия передней фары</param>
@@ -33,6 +33,20 @@ namespace Zakirova
             Weight = weight;
             MainColor = mainColor;
             
+        }
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Truck(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromArgb(Convert.ToInt32(strs[2]));
+            }
         }
 
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -108,6 +122,10 @@ truckHeight)
             g.FillEllipse(wheels, _startPosX, _startPosY + 24, 20, 20);
 
 
+        }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.ToArgb()}";
         }
     }
 }

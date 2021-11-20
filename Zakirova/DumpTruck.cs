@@ -57,13 +57,25 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
             BackLight = backLight;
         }
         /// <summary>
-        /// Установка позиции автомобиля
+        /// Конструктор для загрузки с файла
         /// </summary>
-        /// <param name="x">Координата X</param>
-        /// <param name="y">Координата Y</param>
-        /// <param name="width">Ширина картинки</param>
-        /// <param name="height">Высота картинки</param>
-        
+        /// <param name="info"></param>
+        public DumpTruck(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 8)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromArgb(Convert.ToInt32(strs[2]));
+                DopColor = Color.FromArgb(Convert.ToInt32(strs[3]));
+                Duct = Convert.ToBoolean(strs[4]);
+                Carcase = Convert.ToBoolean(strs[5]);
+                FrontLight = Convert.ToBoolean(strs[6]);
+                BackLight = Convert.ToBoolean(strs[7]);
+            }
+        }
+
         /// <summary>
         /// Отрисовка самосвала
         /// </summary>
@@ -109,5 +121,13 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
         {
             DopColor = color;
         }
+
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.ToArgb()}{separator}{Duct}{separator}{Carcase}" +
+           $"{separator}{FrontLight}{ separator}{BackLight}";
+        }
+
     }
 }
