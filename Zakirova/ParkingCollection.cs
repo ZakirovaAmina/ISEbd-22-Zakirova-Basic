@@ -1,8 +1,10 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Zakirova
 {
@@ -24,6 +26,10 @@ namespace Zakirova
         /// Высота окна отрисовки
         /// </summary>
         private readonly int pictureHeight;
+        /// <summary>
+        /// Разделитель для записи информации в файл
+        /// </summary>
+        private readonly char separator = ':';
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -78,6 +84,119 @@ namespace Zakirova
                 }
             }
         }
-    }
 
+        /// <summary>
+        /// Метод записи информации в файл
+        /// </summary>
+        /// <param name="text">Строка, которую следует записать</param>
+        /// <param name="stream">Поток для записи</param>
+        private void WriteToFile(string text, FileStream stream)
+        {
+            byte[] info = new UTF8Encoding(true).GetBytes(text);
+            stream.Write(info, 0, info.Length);
+        }
+        /// <summary>
+        /// Сохранение информации по автомобилям на парковках в файл
+        /// </summary>
+        /// <param name="filename">Путь и имя файла</param>
+        /// <returns></returns>
+        public bool SaveData(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            using (StreamWriter fs = new StreamWriter(filename))
+            {
+                fs.Write($"ParkingCollection{Environment.NewLine}");
+                foreach (var level in parkingStages)
+                {
+                    //Начинаем парковку
+                    fs.Write($"Parking{separator}{level.Key}{Environment.NewLine}");
+                    ITTruck truck = null;
+                    for (int i = 0; (truck = level.Value.GetNext(i)) != null; i++)
+                    {
+                        if (truck != null)
+                        {
+                            //если место не пустое
+                            //Записываем тип машины
+                            if (truck.GetType().Name == "Truck")
+                            {
+                                fs.Write($"Truck{separator}");
+                            }
+                            if (truck.GetType().Name == "DumpTruck")
+                            {
+                                fs.Write($"DumpTruck{separator}");
+                            }
+                            //Записываемые параметры
+                            fs.Write(truck + Environment.NewLine);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        /// <summary>
+        /// Загрузка Информации по автомобилям на парковках из файла
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public bool LoadData(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+            string bufferTextFromFile = "";
+            using (StreamReader fs = new StreamReader(filename))
+            {
+
+                bufferTextFromFile = fs.ReadLine();
+
+                if (bufferTextFromFile.Contains("ParkingCollection"))
+                {
+                    //очищаем записи
+                    parkingStages.Clear();
+                }
+                else
+                {
+                    //если нет такой записи, то это не те данные
+                    return false;
+                }
+                Vehicle truck = null;
+                string key = string.Empty;                
+                while (!fs.EndOfStream) { 
+
+                    //идем по считанным записям
+                    bufferTextFromFile = fs.ReadLine();
+                    if (bufferTextFromFile.Contains("Parking"))
+                    {
+                        //начинаем новую парковку
+                        key = bufferTextFromFile.Split(separator)[1];
+                        parkingStages.Add(key, new Parking<Vehicle>(pictureWidth, pictureHeight));
+                        continue;
+                    }
+                    if (string.IsNullOrEmpty(bufferTextFromFile))
+                    {
+                        continue;
+                    }
+                    if (bufferTextFromFile.Split(separator)[0] == "Truck")
+                    {
+                        truck = new Truck(bufferTextFromFile.Split(separator)[1]);
+                    }
+                    else if (bufferTextFromFile.Split(separator)[0] == "DumpTruck")
+                    {
+                        truck = new DumpTruck(bufferTextFromFile.Split(separator)[1]);
+                    }
+                    var result = parkingStages[key] + truck;
+                    if (!result)
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            return true;
+        }
+    }
 }

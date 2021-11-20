@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Zakirova
 {
     public partial class FormTruckParking : Form
@@ -155,6 +156,42 @@ pictureBoxParking.Height);
         private void listBoxParking_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+        private void toolStripMenuItemSave_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogTruck.ShowDialog() == DialogResult.OK)
+            {
+                if (parkingCollection.SaveData(saveFileDialogTruck.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void toolStripMenuItemDownload_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogTruck.ShowDialog() == DialogResult.OK)
+            {
+                if (parkingCollection.LoadData(openFileDialogTruck.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
