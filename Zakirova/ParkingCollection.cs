@@ -145,7 +145,7 @@ namespace Zakirova
         {
             if (!File.Exists(filename))
             {
-                return false;
+				throw new FileNotFoundException();
             }
             string bufferTextFromFile = "";
             using (StreamReader fs = new StreamReader(filename))
@@ -160,9 +160,10 @@ namespace Zakirova
                 }
                 else
                 {
-                    //если нет такой записи, то это не те данные
-                    return false;
-                }
+					//если нет такой записи, то это не те данные
+					throw new FileLoadException("Неверный формат файла");
+					
+				}
                 Vehicle truck = null;
                 string key = string.Empty;                
                 while (!fs.EndOfStream) { 
@@ -191,7 +192,7 @@ namespace Zakirova
                     var result = parkingStages[key] + truck;
                     if (!result)
                     {
-                        return false;
+                        throw new FileLoadException("Не удалось загрузить автомобиль на парковку");
                     }
                 }
 

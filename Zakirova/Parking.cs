@@ -63,8 +63,8 @@ namespace Zakirova
         {
             if (t._places.Count >= t._maxCount)
             {
-                return false;
-            }
+				throw new ParkingOverflowException();
+			}
             t._places.Add(truck);
             return true;
         }
@@ -80,8 +80,8 @@ namespace Zakirova
          {
             if (index < -1 || index > t._places.Count)
             {
-                return null;
-            }
+				throw new ParkingNotFoundException(index);
+			}
             T truck = t._places[index];
             t._places.RemoveAt(index);
             return truck;
