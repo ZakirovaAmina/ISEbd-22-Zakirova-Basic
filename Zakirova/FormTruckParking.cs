@@ -89,14 +89,15 @@ pictureBoxParking.Height);
 				{
 					if ((parkingCollection[listBoxParking.SelectedItem.ToString()]) +
 				   truck)
-					{
-						Draw();
+					{						
+				    Draw();
 						logger.Info($"Добавлен самосвал {truck}");
 					}
 					else
 					{
 						MessageBox.Show("Самосвал не удалось поставить");
 						logger.Warn($"Самосвал не удалось поставить");
+
 					}
 					Draw();
 				}
@@ -104,7 +105,12 @@ pictureBoxParking.Height);
 				{
 					MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
 				   MessageBoxIcon.Error);
-					logger.Warn($"{ex.Message} Переполнение");
+				}
+				catch (ParkingAlreadyHaveException ex)
+				{
+					MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+				   MessageBoxIcon.Error);
+					 logger.Warn($"{ex.Message} Дублирование");
 				}
 				catch (Exception ex)
 				{
@@ -144,6 +150,18 @@ pictureBoxParking.Height);
 				   MessageBoxIcon.Error);
 					logger.Warn($"{ex.Message} Не найдено");
 				}
+				catch (ParkingOverflowException ex)
+				{
+					MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+				   MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Переполнение");
+				}
+				catch (ParkingAlreadyHaveException ex)
+				{
+					MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+				   MessageBoxIcon.Error);
+					// logger.Warn($"{ex.Message} Дублирование");
+				}
 				catch (Exception ex)
 				{
 					MessageBox.Show(ex.Message, "Неизвестная ошибка",
@@ -167,6 +185,7 @@ pictureBoxParking.Height);
                 return;
             }
 			logger.Info($"Добавили парковку {textBoxLevelsName.Text}");
+		
 			parkingCollection.AddTruckParking(textBoxLevelsName.Text);
             ReloadLevels();
         }
@@ -256,6 +275,16 @@ pictureBoxParking.Height);
 				   MessageBoxButtons.OK, MessageBoxIcon.Error);
 					logger.Warn($"{ex.Message} Неизвестная ошибка при загрузке");
 				}
+			}
+		}
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+			if (listBoxParking.SelectedIndex > -1)
+			{
+				parkingCollection[listBoxParking.SelectedItem.ToString()].Sort();
+				Draw();
+				logger.Info("Сортировка уровней");
 			}
 		}
     }

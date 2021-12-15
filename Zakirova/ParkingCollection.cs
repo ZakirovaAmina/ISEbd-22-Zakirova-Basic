@@ -106,31 +106,25 @@ namespace Zakirova
             {
                 File.Delete(filename);
             }
-            using (StreamWriter fs = new StreamWriter(filename))
-            {
-                fs.Write($"ParkingCollection{Environment.NewLine}");
+            using (FileStream fs = new FileStream(filename, FileMode.Create))
+            {                
                 foreach (var level in parkingStages)
                 {
                     //Начинаем парковку
-                    fs.Write($"Parking{separator}{level.Key}{Environment.NewLine}");
-                    ITTruck truck = null;
-                    for (int i = 0; (truck = level.Value.GetNext(i)) != null; i++)
+                    WriteToFile($"Parking{separator}{level.Key}{Environment.NewLine}", fs);
+                    foreach (ITTruck car in level.Value)
                     {
-                        if (truck != null)
+                        //Записываем тип мшаины
+                        if (car.GetType().Name == "Truck")
                         {
-                            //если место не пустое
-                            //Записываем тип машины
-                            if (truck.GetType().Name == "Truck")
-                            {
-                                fs.Write($"Truck{separator}");
-                            }
-                            if (truck.GetType().Name == "DumpTruck")
-                            {
-                                fs.Write($"DumpTruck{separator}");
-                            }
-                            //Записываемые параметры
-                            fs.Write(truck + Environment.NewLine);
+                            WriteToFile($"Truck{separator}", fs);
                         }
+                        if (car.GetType().Name == "DumpTruck")
+                        {
+                            WriteToFile($"DumpTruck{separator}", fs);
+                        }
+                        //Записываемые параметры
+                        WriteToFile(car + Environment.NewLine, fs);
                     }
                 }
             }
