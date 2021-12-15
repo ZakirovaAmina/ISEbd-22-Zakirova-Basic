@@ -10,8 +10,8 @@ namespace Zakirova
     /// <summary>
     /// Класс отрисовки самовсвала
     /// </summary>
-    public class DumpTruck : Truck
-	{       
+    public class DumpTruck : Truck, IEquatable<DumpTruck>
+    {       
         /// <summary>
         /// Дополнительный цвет
         /// </summary>
@@ -129,5 +129,76 @@ bool duct, bool carcase, bool frontLight, bool backLight) :
            $"{separator}{FrontLight}{ separator}{BackLight}";
         }
 
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса SportCar
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(DumpTruck other)
+        {
+            // Реализовать метод сравнения для дочернего класса
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Duct != other.Duct)
+            {
+                return false;
+            }
+            if (Carcase != other.Carcase)
+            {
+                return false;
+            }
+            if (FrontLight != other.FrontLight)
+            {
+                return false;
+            }
+            if (BackLight != other.BackLight)
+            {
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                
+            return false;
+            }
+            if (!(obj is DumpTruck truckObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(truckObj);
+            }
+        }
     }
 }

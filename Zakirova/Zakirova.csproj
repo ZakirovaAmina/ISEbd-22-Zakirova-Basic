@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>packages\NLog.4.7.12\lib\net45\NLog.dll</HintPath>
+      <HintPath>packages\NLog.4.7.13\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -76,6 +76,7 @@
     <Compile Include="FormTruck.Designer.cs">
       <DependentUpon>FormTruck.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParkingAlreadyHaveException.cs" />
     <Compile Include="ParkingCollection.cs" />
     <Compile Include="ParkingNotFoundException.cs" />
     <Compile Include="ParkingOccupiedPlaceException.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Truck.cs" />
+    <Compile Include="TruckComparer.cs" />
     <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="FormTruck.resx">
       <DependentUpon>FormTruck.cs</DependentUpon>

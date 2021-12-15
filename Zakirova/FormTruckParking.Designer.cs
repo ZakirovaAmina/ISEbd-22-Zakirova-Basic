@@ -46,6 +46,7 @@ namespace Zakirova
             this.toolStripMenuItemDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogTruck = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogTruck = new System.Windows.Forms.OpenFileDialog();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -177,14 +178,14 @@ namespace Zakirova
             // toolStripMenuItemSave
             // 
             this.toolStripMenuItemSave.Name = "toolStripMenuItemSave";
-            this.toolStripMenuItemSave.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemSave.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItemSave.Text = "Сохранить";
             this.toolStripMenuItemSave.Click += new System.EventHandler(this.toolStripMenuItemSave_Click);
             // 
             // toolStripMenuItemDownload
             // 
             this.toolStripMenuItemDownload.Name = "toolStripMenuItemDownload";
-            this.toolStripMenuItemDownload.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemDownload.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItemDownload.Text = "Загрузить";
             this.toolStripMenuItemDownload.Click += new System.EventHandler(this.toolStripMenuItemDownload_Click);
             // 
@@ -197,11 +198,22 @@ namespace Zakirova
             this.openFileDialogTruck.FileName = "openFileDialog1";
             this.openFileDialogTruck.Filter = "txt file | *.txt";
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(668, 201);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(120, 39);
+            this.buttonSort.TabIndex = 10;
+            this.buttonSort.Text = "Сортировка";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
+            // 
             // FormTruckParking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.textBoxLevelsName);
             this.Controls.Add(this.DelPark);
             this.Controls.Add(this.AddPark);
@@ -243,5 +255,6 @@ namespace Zakirova
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDownload;
         private System.Windows.Forms.SaveFileDialog saveFileDialogTruck;
         private System.Windows.Forms.OpenFileDialog openFileDialogTruck;
+        private System.Windows.Forms.Button buttonSort;
     }
 }
